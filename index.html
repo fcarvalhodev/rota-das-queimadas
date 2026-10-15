@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rota das Queimadas</title>
+<meta name="description" content="Queimadas e desmatamento no Brasil de Lula 1 até hoje, explicado de um jeito simples: os focos de fogo e a derrubada da Amazônia governo por governo, com os dados do INPE, o que cada governo fez e o que a seca explica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: the Rotas skeleton in the easy-reading format. The Queimadas route colour is fire orange. Order: question, short answer, fire vs deforestation, fire by year and government, drought or people, deforestation by government, what each government did, true or false, summary, yearly table. */
+:root{
+  --bg:#f1f1f5; --paper:#fbfbfd; --ink:#1b1b24; --muted:#5b5b6b; --line:#d5d5e0; --soft:#e6e6ee;
+  --accent:#c2410c; --accent-soft:#fbe6da;
+  --dist:#5b6b7a; --state:#7a3e8f; --eth:#3f7d3a; --fed:#b3261e;
+  --g-dilma:#c2185b; --g-temer:#4e5d6c; --g-bolso:#1d5fa8; --g-lula:#c62828;
+  --court:#8a6512; --court-soft:#f4ead2; --gray:#8a8c92;
+  --ok:#1f6b45; --ok-soft:#dcefe3; --no:#a12a2a; --no-soft:#f6dede; --part:#7a5a00; --part-soft:#f6ebc9; --open:#6b5bb5; --open-soft:#e8e5f6;
+  --display:"Archivo","Arial Narrow",Impact,sans-serif;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121218; --paper:#1a1a22; --ink:#ebebf2; --muted:#a5a5b5; --line:#2e2e3a; --soft:#24242e;
+  --accent:#fb923c; --accent-soft:#3a1f10;
+  --dist:#9fb0c0; --state:#c99ad8; --eth:#8fcf88; --fed:#f08a82;
+  --g-dilma:#f48fb1; --g-temer:#a9b6c4; --g-bolso:#7fb2ec; --g-lula:#ef9a9a;
+  --court:#e0b552; --court-soft:#3a2e14; --gray:#6e7077;
+  --ok:#7fd3a3; --ok-soft:#173326; --no:#f19b9b; --no-soft:#3a1c1c; --part:#e8c25a; --part-soft:#3a3016; --open:#a99cf0; --open-soft:#29254a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121218; --paper:#1a1a22; --ink:#ebebf2; --muted:#a5a5b5; --line:#2e2e3a; --soft:#24242e;
+  --accent:#fb923c; --accent-soft:#3a1f10;
+  --dist:#9fb0c0; --state:#c99ad8; --eth:#8fcf88; --fed:#f08a82;
+  --g-dilma:#f48fb1; --g-temer:#a9b6c4; --g-bolso:#7fb2ec; --g-lula:#ef9a9a;
+  --court:#e0b552; --court-soft:#3a2e14; --gray:#6e7077;
+  --ok:#7fd3a3; --ok-soft:#173326; --no:#f19b9b; --no-soft:#3a1c1c; --part:#e8c25a; --part-soft:#3a3016; --open:#a99cf0; --open-soft:#29254a; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.7}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px}
+.kicker,.mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kicker{color:var(--accent)}
+h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(46px,11vw,104px);line-height:.9;margin:0;text-transform:uppercase;overflow-wrap:anywhere}
+h2{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:clamp(34px,7vw,52px);line-height:.95;margin:0;text-transform:uppercase;text-wrap:balance}
+h3{font-family:var(--ui);font-weight:700;font-size:22px;line-height:1.2;margin:0;text-wrap:balance}
+p{margin:0}
+header,section{display:grid;grid-template-columns:minmax(0,1fr)}
+header{padding-block:40px 8px;gap:18px}
+section{padding-block:48px 8px;gap:18px}
+.lg{font-size:21px;line-height:1.6}
+.sub{color:var(--muted);max-width:62ch}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 14px;line-height:1.5}
+.src a{color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:12px;align-content:start}
+.answer-box{background:var(--accent-soft);border:2px solid var(--accent);border-radius:6px;padding:20px;margin-top:40px}
+.note{font-size:16px;color:var(--muted)}
+.rv-btn{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-family:var(--ui);font-weight:800;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--paper);background:var(--accent);padding:10px 16px;border-radius:999px;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.rv-btn:hover{filter:brightness(1.08)}
+
+/* four ways */
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:stretch}
+.stop{background:var(--paper);border:2px solid var(--accent);border-radius:8px;padding:14px 10px;display:grid;gap:6px;justify-items:center;text-align:center;align-content:start}
+.stop .emo{font-size:40px;line-height:1}
+.stop b{font-family:var(--ui);font-size:17px;line-height:1.2}
+.stop span{font-size:15px;color:var(--muted);line-height:1.4}
+.stop.court{border-color:var(--court);background:var(--court-soft)}
+.stop.court b{color:var(--court)}
+.who-decides{display:grid;grid-template-columns:1fr 3fr;gap:8px;font-family:var(--ui);font-weight:700;font-size:15px;text-align:center}
+.who-decides span{padding:6px;border-radius:4px}
+.who-decides .j{background:var(--court-soft);color:var(--court)}
+.who-decides .m{background:var(--accent-soft);color:var(--accent)}
+
+/* cases */
+.cases{display:grid;gap:12px}
+.case{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--c,var(--accent));border-radius:6px;padding:16px 18px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 16px}
+.case .when{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.4;padding-top:4px}
+.case .bd{display:grid;gap:6px}
+.case h3{font-size:21px}
+.case .who{font-family:var(--ui);font-size:15px;color:var(--muted);line-height:1.3}
+.case p{font-size:17px;line-height:1.55}
+.case .chips{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.st{font-family:var(--ui);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:2px solid currentColor}
+.st.y{color:var(--ok);background:var(--ok-soft)}
+.st.n{color:var(--no);background:var(--no-soft)}
+.st.j{color:var(--court);background:var(--court-soft)}
+.st.g{color:var(--muted);background:var(--soft)}
+.why{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.4}
+.group-t{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+/* count */
+.tally{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;max-width:520px}
+.tally i{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--ui);font-weight:900;font-size:clamp(14px,3vw,22px);color:var(--paper)}
+.tally i.y{background:var(--ok)}
+.tally i.n{background:var(--no)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--ui);font-weight:600;font-size:16px}
+.leg i{display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:-2px}
+
+/* newspaper analogy */
+.jar{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.jar .card{border-top:6px solid var(--c)}
+.jar .card .emo{font-size:40px;line-height:1}
+.jar .card p{font-size:17px}
+.jar .card b{font-family:var(--ui);font-size:20px;line-height:1.3}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.two .card{border-top:6px solid var(--c)}
+.two .card h3{font-size:20px}
+.two .card ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:17px;line-height:1.5}
+
+/* true or false */
+.vf{display:grid;gap:12px}
+.vfi{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:grid;gap:8px}
+.vfi p{font-size:18px}
+.badge{justify-self:start;font-family:var(--ui);font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.badge.f{background:var(--no-soft);color:var(--no);border:2px solid var(--no)}
+.badge.m{background:var(--part-soft);color:var(--part);border:2px solid var(--part)}
+.badge.v{background:var(--ok-soft);color:var(--ok);border:2px solid var(--ok)}
+.badge.o{background:var(--open-soft);color:var(--open);border:2px solid var(--open)}
+
+/* de-para */
+.dp{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:16px;line-height:1.45}
+.dp th,.dp td{padding:12px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+.dp thead th{border-top:none;font-family:var(--ui);font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.dp thead th.l{color:var(--no);background:var(--no-soft)}
+.dp thead th.r{color:var(--accent);background:var(--accent-soft)}
+.dp tbody th{font-family:var(--ui);font-weight:700;font-size:15px;width:24%}
+.dp .tg,.card .tg{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.dp .tg.d,.card .tg.d{color:var(--ok)}.dp .tg.a{color:var(--part)}.dp .tg.o{color:var(--open)}
+@media (max-width:640px){.dp,.dp thead,.dp tbody,.dp tr,.dp th,.dp td{display:block;width:100%}.dp thead{display:none}.dp tbody tr{border-top:2px solid var(--line)}.dp tbody th{background:var(--soft);width:100%}.dp td::before{content:attr(data-l);display:block;font-family:var(--ui);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}.dp td.l::before{color:var(--no)}.dp td.r::before{color:var(--accent)}}
+/* bars */
+.tl{display:grid;gap:10px}
+.tr{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}
+.tr .lab{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-family:var(--ui);font-weight:700;font-size:17px}
+.tr .lab span{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--muted)}
+.tr .t{height:30px;background:var(--soft);border-radius:3px;position:relative}
+.tr .f{position:absolute;inset:0 auto 0 0;background:var(--c);border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--paper);font-family:var(--mono);font-weight:600;font-size:14px;white-space:nowrap}
+.tr .v{position:absolute;top:0;bottom:0;display:flex;align-items:center;font-family:var(--mono);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap}
+.verdict{background:var(--ink);color:var(--paper);border-radius:6px;padding:22px 20px;display:grid;gap:12px}
+.verdict h2{color:var(--paper)}
+.verdict ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:20px}
+details.mais{margin-top:44px;border:2px solid var(--line);border-radius:6px;background:var(--paper)}
+details.mais>summary{cursor:pointer;padding:18px 20px;font-family:var(--ui);font-weight:700;font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.mais>summary::after{content:"+";font-family:var(--mono);font-size:24px;line-height:1}
+details.mais[open]>summary::after{content:"−"}
+details.mais>summary::-webkit-details-marker{display:none}
+.mais-body{padding:0 20px 20px;font-size:17px;line-height:1.6;display:grid;gap:14px}
+.tbl{overflow-x:auto}
+.mais-body table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+.mais-body th,.mais-body td{text-align:left;padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}
+.mais-body th{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mais-body td:first-child{font-family:var(--mono);white-space:nowrap;font-size:13px}
+footer{padding-block:44px 60px;color:var(--muted);font-size:14px;display:grid;gap:8px}
+@media (max-width:640px){.path{grid-template-columns:repeat(2,minmax(0,1fr))}.who-decides{grid-template-columns:1fr}.case{grid-template-columns:minmax(0,1fr)}.case .when{padding-top:0}}
+
+/* where the litre goes */
+.stack{display:flex;height:46px;border-radius:6px;overflow:hidden;gap:2px}
+.stack i{flex:var(--w) 1 0;background:var(--c)}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.part{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:6px;padding:12px 14px;display:grid;gap:2px;align-content:start}
+.part b{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:34px;line-height:1;color:var(--c)}
+.part span{font-family:var(--ui);font-weight:700;font-size:17px}
+.part small{font-size:14px;color:var(--muted);line-height:1.4}
+/* governments */
+.gov{background:var(--paper);border:1px solid var(--line);border-left:8px solid var(--c);border-radius:6px;padding:18px 20px;display:grid;gap:12px}
+.gov .gh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px}
+.gov .gh h3{font-size:24px;color:var(--c)}
+.gov .gh span{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.gov ul{margin:0;padding-left:0;list-style:none;display:grid;gap:12px;font-size:17px;line-height:1.55}
+.gov li{padding-left:28px;position:relative}
+.gov li>b.up,.gov li>b.dn{position:absolute;left:0;top:0;font-family:var(--ui);font-size:20px}
+b.up{color:var(--no)} b.dn{color:var(--ok)}
+.gov .tg{display:inline-block;margin-left:4px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:1px 8px;border-radius:999px;border:1px solid currentColor;color:var(--ok)}
+/* price chart */
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 8px 6px}
+.chart svg{display:block;width:100%;height:auto}
+.chart .ax{stroke:var(--line)}
+.chart .gl{stroke:var(--soft)}
+.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.chart .era{font-family:var(--ui);font-weight:800;font-size:12px}
+.chart .nom{fill:none;stroke:var(--accent);stroke-width:2.5}
+.chart .real{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4}
+.chart .pk{fill:var(--accent)}
+.chart .lbl{font-family:var(--ui);font-weight:700;font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:4px;stroke-linejoin:round}
+.chart .era{paint-order:stroke;stroke:var(--paper);stroke-width:3px}
+.keyl{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--ui);font-weight:600;font-size:15px}
+.keyl i{display:inline-block;width:22px;height:0;border-top:3px solid var(--accent);vertical-align:4px;margin-right:6px}
+.keyl i.r{border-top:3px dashed var(--ink)}
+.govcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.gc{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:6px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.gc h3{font-size:19px;color:var(--c)}
+.gc .n{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:40px;line-height:1}
+.gc small{font-size:14px;color:var(--muted);line-height:1.4}
+.card .big{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:64px;line-height:1;color:var(--c)}
+.gov .tg.o{color:var(--open)}
+.keyl i.sq{width:14px;height:14px;border:0;border-radius:3px;vertical-align:-2px}
+.gov .tg.a{color:var(--part)}
+</style>
+</head><body>
+
+
+<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><style>/* padrão das Rotas: formato fácil */body{font-size:19px;line-height:1.7}h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(46px,11vw,104px);line-height:.9;text-transform:uppercase;overflow-wrap:anywhere}h2{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:clamp(34px,7vw,52px);line-height:.95;text-transform:uppercase}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a href="https://fcarvalhodev.github.io/rota-das-queimadas/" aria-current="page">Queimadas</a><a href="https://fcarvalhodev.github.io/rota-dos-games/">Games</a><a class="rb-lang" href="en/" hreflang="en" lang="en">EN</a></div></nav>
+<header class="wrap">
+  <div class="kicker">Rota das Queimadas</div>
+  <h1>O fogo e o desmatamento aumentaram com quem?</h1>
+  <p class="lede lg">Os focos de queimada no Brasil e a derrubada da Amazônia, governo por governo, de Lula 1 até hoje, com os dados oficiais do INPE. O que cada governo fez, o que a seca explica e o que é culpa de gente. Com o mesmo critério para todos.</p>
+  <a class="rv-btn" href="visual.html"><span aria-hidden="true">📊</span> Ver o resumo em ícones</a>
+</header>
+
+<main class="wrap">
+
+<section class="answer-box" aria-labelledby="h-curta">
+  <h2 id="h-curta">A resposta curta</h2>
+  <p class="lg">Depende de qual número. No <b>desmatamento da Amazônia</b>, a maior queda foi com <b>Lula 1 e 2</b> (de 27,8 mil km² em 2004 para 7 mil em 2010) e a maior alta foi com <b>Bolsonaro</b> (+54% entre 2018 e 2022). Com <b>Lula 3</b>, caiu de novo, 51% até 2025. No <b>fogo</b>, a média mais alta é a de Lula 1 e 2, quando a derrubada estava no auge. Depois dele, a mais alta é a de Bolsonaro e a mais baixa, a de Dilma. Em <b>2024</b>, com a seca mais forte da história, o Brasil teve o maior número de focos desde 2010. Em <b>2025</b>, a Amazônia teve o menor número de focos já medido.</p>
+</section>
+
+<section aria-labelledby="h-dois">
+  <h2 id="h-dois">Fogo e desmatamento são coisas diferentes</h2>
+  <p class="sub lg">As duas andam juntas, mas são medidas de jeitos diferentes:</p>
+  <div class="two">
+    <div class="card" style="--c:var(--accent)"><h3>🔥 Foco de queimada</h3><p>Um ponto de calor que o satélite vê num dia. O INPE conta os focos de todo o Brasil desde 1998. Um incêndio grande pode virar muitos focos. Seca e calor fazem o número subir, mesmo sem ninguém mudar de comportamento.</p></div>
+    <div class="card" style="--c:var(--ok)"><h3>🌳 Desmatamento</h3><p>Floresta derrubada de vez, medida em quilômetros quadrados por ano pelo PRODES, do INPE. O “ano” vai de agosto a julho. Depois de derrubar, muita gente usa o fogo para limpar a área, por isso os dois andam juntos.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-focos">
+  <h2 id="h-focos">Os focos de queimada, ano a ano</h2>
+  <p class="sub lg">Quantos focos de fogo o satélite de referência do INPE viu no Brasil em cada ano. A cor mostra quem governava. 2026 vai só até setembro.</p>
+  <div class="chart" id="cfoc" role="img" aria-label="Focos de queimada no Brasil por ano, de 2003 a 2026. O maior ano foi 2007, com 393.915 focos. 2024 teve 278.299, o maior desde 2010. 2025 teve 136.393."></div>
+  <div class="keyl"><span><i class="sq" style="background:var(--g-lula)"></i>Lula</span><span><i class="sq" style="background:var(--g-dilma)"></i>Dilma</span><span><i class="sq" style="background:var(--g-temer)"></i>Temer</span><span><i class="sq" style="background:var(--g-bolso)"></i>Bolsonaro</span></div>
+  <h3>Média de focos por ano em cada governo</h3>
+  <div class="tl" id="fgov" role="img" aria-label="Média de focos por ano no Brasil: Lula 1 e 2, 301.720; Dilma, 171.034; Temer, 190.712; Bolsonaro, 201.318; Lula 3, 179.985"></div>
+  <p class="lg">Os anos com <b>mais fogo</b> foram os de <b>Lula 1 e 2</b>: média de 302 mil focos por ano, na época em que a derrubada da Amazônia também estava no auge. Depois, a média caiu em todos os governos. Entre os quatro seguintes, a mais alta foi a de <b>Bolsonaro</b>, com 201 mil, e a mais baixa, a de <b>Dilma</b>, com 171 mil. <b>Lula 3</b> tem 180 mil até setembro de 2026.</p>
+  <h3>Só na Amazônia</h3>
+  <div class="tl" id="fam" role="img" aria-label="Média de focos por ano no bioma Amazônia: Lula 1 e 2, 157.176; Dilma, 75.356; Temer, 95.336; Bolsonaro, 95.615; Lula 3, 83.119"></div>
+  <p class="lg">Na Amazônia, a ordem é parecida. O ano de <b>2024</b> teve 140 mil focos, o maior desde 2007, com a seca mais forte da história. Em <b>2025</b>, foram 43 mil, o <b>menor número de toda a série</b>, que começa em 1998.</p>
+  <p class="note">A média por ano soma os meses de cada governo. Lula 3 vai até setembro de 2026, e os meses mais quentes de 2026 já passaram, mas o ano ainda não acabou. Um foco é um ponto de calor visto num dia, não um incêndio inteiro.</p>
+  <span class="src"><a href="https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil" target="_blank" rel="noopener">INPE: focos no Brasil</a><a href="https://data.inpe.br/queimadas/estatisticas/?tipo=biomas&item=amazonia" target="_blank" rel="noopener">INPE: focos na Amazônia</a><a href="dados/inpe-focos-brasil-mensal-2026-10-15.csv">Dados usados aqui: Brasil</a><a href="dados/inpe-focos-amazonia-mensal-2026-10-15.csv">Amazônia</a></span>
+</section>
+
+<section aria-labelledby="h-seca">
+  <h2 id="h-seca">Seca ou culpa de gente?</h2>
+  <p class="sub lg">As duas coisas. O fogo na floresta quase sempre começa com alguém, para limpar pasto ou área derrubada. O clima decide quanto ele se espalha.</p>
+  <div class="two">
+    <div class="card" style="--c:var(--accent)"><h3>O que faz o fogo subir</h3><ul>
+      <li>Seca forte e calor, como em 2024, com o El Niño.</li>
+      <li>Muita floresta derrubada, que depois é queimada para virar pasto.</li>
+      <li>Fiscalização fraca, que deixa o fogo criminoso sem punição.</li>
+    </ul></div>
+    <div class="card" style="--c:var(--ok)"><h3>Por isso, cuidado com comparações</h3><ul>
+      <li>Um ano ruim pode vir de uma seca, sem ninguém mudar de comportamento.</li>
+      <li>Uma queda pode vir de chuva, e não só de fiscalização.</li>
+      <li>Por isso olhamos a média de vários anos e o desmatamento junto com o fogo.</li>
+    </ul></div>
+  </div>
+</section>
+
+
+<section aria-labelledby="h-desm">
+  <h2 id="h-desm">A derrubada da Amazônia, governo por governo</h2>
+  <p class="sub lg">Quilômetros quadrados de floresta derrubada por ano na Amazônia Legal, medidos pelo PRODES do INPE. Cada ano vai de agosto a julho.</p>
+  <div class="chart" id="cdes" role="img" aria-label="Desmatamento anual na Amazônia Legal de 2003 a 2025: 25.396 km² em 2003, pico de 27.772 em 2004, mínimo de 4.571 em 2012, alta até 13.038 em 2021 e queda para 5.731 em 2025."></div>
+  <h3>Média por ano de cada governo</h3>
+  <div class="tl" id="desm" role="img" aria-label="Média anual de desmatamento: Lula 1 e 2, 15.687 km²; Dilma, 5.999; Temer, 7.242; Bolsonaro, 11.403; Lula 3, 7.104"></div>
+  <div class="govcards">
+    <div class="gc" style="--c:var(--g-lula)"><h3>Lula 1 e 2</h3><span class="n">−72%</span><small>De 25.396 km² em 2003 para 7.000 em 2010</small></div>
+    <div class="gc" style="--c:var(--g-dilma)"><h3>Dilma</h3><span class="n">+23%</span><small>De 6.418 em 2011 para 7.893 em 2016, passando pelo mínimo histórico, 4.571 em 2012</small></div>
+    <div class="gc" style="--c:var(--g-temer)"><h3>Temer</h3><span class="n">+8%</span><small>De 6.947 em 2017 para 7.536 em 2018</small></div>
+    <div class="gc" style="--c:var(--g-bolso)"><h3>Bolsonaro</h3><span class="n">+54%</span><small>De 7.536 em 2018 para 11.594 em 2022, com pico de 13.038 em 2021</small></div>
+    <div class="gc" style="--c:var(--g-lula)"><h3>Lula 3</h3><span class="n">−51%</span><small>De 11.594 em 2022 para 5.731 em 2025, a segunda menor taxa da série</small></div>
+  </div>
+  <p class="lg">A média de Lula 1 e 2 é a mais alta porque ele começou no pico: 2004 foi o pior ano do século. Mas foi no governo dele que a derrubada mais caiu. A derrubada voltou a subir aos poucos com Dilma e Temer, disparou com Bolsonaro e caiu de novo com Lula 3.</p>
+  <span class="src"><a href="https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates" target="_blank" rel="noopener">INPE/TerraBrasilis: taxas do PRODES</a><a href="https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/sistema-do-inpe-aponta-5-731-km2-de-desmatamento-na-amazonia-em-2025" target="_blank" rel="noopener">INPE: taxa de 2025</a><a href="dados/prodes-amazonia-legal-por-estado-terrabrasilis-2026-09-14.csv">Dados usados aqui</a></span>
+</section>
+
+<section aria-labelledby="h-gov">
+  <h2 id="h-gov">O que cada governo fez</h2>
+  <p class="sub lg">As decisões que mexeram com o fogo e a derrubada. A seta diz se a decisão ajudou a <b class="dn">proteger ↓</b> ou a <b class="up">enfraquecer ↑</b> a fiscalização.</p>
+
+  <div class="gov" style="--c:var(--g-lula)">
+    <div class="gh"><h3>Lula, 1º e 2º mandatos</h3><span>2003 – 2010</span></div>
+    <ul>
+      <li><b class="dn">↓</b> <b>PPCDAm, 2004.</b> Com Marina Silva no Meio Ambiente, o governo cria o plano contra o desmatamento da Amazônia, que junta vários ministérios, satélite e fiscalização. De 2004 a 2012, a derrubada cai 84%. <span class="tg d">Documentado</span></li>
+      <li><b class="dn">↓</b> <b>Fundo Amazônia, 2008.</b> Criado por decreto e gerido pelo BNDES, recebe cerca de R$ 3,4 bilhões, a maior parte da Noruega, para projetos contra o desmatamento. <span class="tg d">Documentado</span></li>
+    </ul>
+    <span class="src"><a href="https://www.brasildefato.com.br/2023/04/12/plano-para-zerar-desmatamento-e-retomado-por-lula-e-entra-em-consulta-publica" target="_blank" rel="noopener">Brasil de Fato: PPCDAm</a><a href="https://www.brasilparalelo.com.br/artigos/fundo-amazonia" target="_blank" rel="noopener">Brasil Paralelo: Fundo Amazônia</a></span>
+  </div>
+
+  <div class="gov" style="--c:var(--g-dilma)">
+    <div class="gh"><h3>Dilma Rousseff</h3><span>2011 – mai 2016</span></div>
+    <ul>
+      <li><b class="up">↑</b> <b>Novo Código Florestal, 2012.</b> Dilma sanciona a lei com 12 vetos. Ambientalistas, a CNBB e cientistas criticam: quem desmatou antes de julho de 2008 passa a ter de recuperar menos do que a lei antiga mandava. <span class="tg d">Documentado</span></li>
+      <li><b>Mínimo histórico, 2012.</b> No mesmo ano, a derrubada bate o menor número da série, 4.571 km². Depois volta a subir aos poucos. <span class="tg d">Documentado</span></li>
+    </ul>
+    <span class="src"><a href="https://ihu.unisinos.br/noticias/509968-novo-codigo-e-retrocesso-dizem-ambientalistas" target="_blank" rel="noopener">IHU/Estadão: críticas ao Código</a></span>
+  </div>
+
+  <div class="gov" style="--c:var(--g-temer)">
+    <div class="gh"><h3>Michel Temer</h3><span>mai 2016 – 2018</span></div>
+    <ul>
+      <li><b>Derrubada estável, em patamar mais alto.</b> Entre 6.900 e 7.600 km² por ano. Não achamos medida federal grande, para mais ou para menos, que tenha mudado a fiscalização. <span class="tg d">Documentado</span></li>
+    </ul>
+  </div>
+
+  <div class="gov" style="--c:var(--g-bolso)">
+    <div class="gh"><h3>Jair Bolsonaro</h3><span>2019 – 2022</span></div>
+    <ul>
+      <li><b class="up">↑</b> <b>Fundo Amazônia parado, 2019.</b> O governo extingue o comitê que aprovava os projetos. Noruega e Alemanha suspendem as doações, e cerca de R$ 3,2 bilhões ficam parados. Em 2022, o STF manda reativar o fundo. <span class="tg d">Documentado</span></li>
+      <li><b class="up">↑</b> <b>Menos multas.</b> Nos dois primeiros anos, o Ibama aplicou em média 2.610 autuações por ano por crimes contra a flora na Amazônia, 43,5% menos que a média de 2012 a 2018. <span class="tg d">Documentado</span></li>
+      <li><b class="up">↑</b> <b>Dia do Fogo, agosto de 2019.</b> Fazendeiros de Novo Progresso, no Pará, são acusados de combinar queimadas no mesmo dia. As investigações foram arquivadas em 2024, sem ninguém indiciado. <span class="tg a">Alegação: coordenação não provada</span></li>
+      <li><b class="up">↑</b> <b>Fim do PPCDAm.</b> O plano contra o desmatamento é extinto no governo Bolsonaro. <span class="tg d">Documentado</span></li>
+    </ul>
+    <span class="src"><a href="https://www.ecycle.com.br/paralisacao-do-fundo-amazonia-fragilizou-orgaos-como-ibama/" target="_blank" rel="noopener">eCycle: Fundo Amazônia parado</a><a href="https://www.poder360.com.br/brasil/numero-de-autos-de-infracao-ambiental-tem-queda-de-435-com-bolsonaro/" target="_blank" rel="noopener">Poder360: multas</a><a href="https://ihu.unisinos.br/643021-investigacoes-sobre-dia-do-fogo-sao-arquivadas-ninguem-e-responsabilizado" target="_blank" rel="noopener">IHU: Dia do Fogo arquivado</a><a href="https://www.brasildefato.com.br/2023/04/12/plano-para-zerar-desmatamento-e-retomado-por-lula-e-entra-em-consulta-publica" target="_blank" rel="noopener">Brasil de Fato: fim do PPCDAm</a></span>
+  </div>
+
+  <div class="gov" style="--c:var(--g-lula)">
+    <div class="gh"><h3>Lula, 3º mandato</h3><span>2023 – hoje</span></div>
+    <ul>
+      <li><b class="dn">↓</b> <b>Fundo Amazônia e PPCDAm de volta, 2023.</b> O fundo volta a receber doações, e o plano contra o desmatamento é retomado, com meta de zerar o desmatamento ilegal até 2030. <span class="tg d">Documentado</span></li>
+      <li><b class="up">↑</b> <b>Ano do fogo, 2024.</b> Com a seca mais forte da história, piorada pelo El Niño, o Brasil tem o maior número de focos desde 2010, e a Amazônia, o maior desde 2007. O número alto rendeu críticas ao governo, que antes criticava a política ambiental de Bolsonaro. <span class="tg d">Documentado</span></li>
+      <li><b class="dn">↓</b> <b>Queda em 2025.</b> Os focos caem 61% até outubro em relação a 2024, e a derrubada da Amazônia chega a 5.731 km², a segunda menor da série. <span class="tg d">Documentado</span></li>
+    </ul>
+    <span class="src"><a href="https://www.brasildefato.com.br/2023/04/12/plano-para-zerar-desmatamento-e-retomado-por-lula-e-entra-em-consulta-publica" target="_blank" rel="noopener">Brasil de Fato: PPCDAm retomado</a><a href="https://www.poder360.com.br/meio-ambiente/noruega-formaliza-nova-doacao-de-r-275-mi-ao-fundo-amazonia/" target="_blank" rel="noopener">Poder360: nova doação da Noruega</a><a href="https://revistaoeste.com/brasil/numero-de-queimadas-bate-recorde-de-15-anos-no-brasil-em-2024/" target="_blank" rel="noopener">Revista Oeste: recorde de 2024</a><a href="https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/inpe-registra-queda-expressiva-de-focos-de-queimadas-em-2025" target="_blank" rel="noopener">INPE: queda em 2025</a><a href="https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/sistema-do-inpe-aponta-5-731-km2-de-desmatamento-na-amazonia-em-2025" target="_blank" rel="noopener">INPE: desmatamento de 2025</a></span>
+  </div>
+</section>
+
+<section aria-labelledby="h-vf">
+  <h2 id="h-vf">É verdade?</h2>
+  <div class="vf">
+    <div class="vfi"><span class="badge m">Meia verdade</span><p><b>“Com Lula as queimadas bateram recorde.”</b> Em 2024 o Brasil teve 278 mil focos, o maior número desde 2010, num ano de seca recorde. Mas em 2025 a Amazônia teve o menor número de focos da série, e a média de Lula 3 é menor que a de Bolsonaro.</p></div>
+    <div class="vfi"><span class="badge v">Verdade</span><p><b>“O pior período de queimadas foi nos primeiros governos Lula.”</b> A média de 2003 a 2010 foi de 302 mil focos por ano, a mais alta de todos. Os anos recordes foram 2007 e 2004. Mas, no mesmo período, o desmatamento caiu 72%.</p></div>
+    <div class="vfi"><span class="badge m">Meia verdade</span><p><b>“Com Bolsonaro a Amazônia pegou fogo como nunca.”</b> O desmatamento subiu 54% e o fogo foi o mais alto entre os governos depois de 2010. Mas os números de fogo ficaram bem abaixo dos anos 2000.</p></div>
+    <div class="vfi"><span class="badge v">Verdade</span><p><b>“O desmatamento da Amazônia subiu com Bolsonaro.”</b> Foi de 7.536 km² em 2018 para 11.594 em 2022, com pico de 13.038 em 2021: alta de 54%.</p></div>
+    <div class="vfi"><span class="badge v">Verdade</span><p><b>“O desmatamento caiu com Lula 3.”</b> De 11.594 km² em 2022 para 5.731 em 2025: queda de 51%.</p></div>
+    <div class="vfi"><span class="badge m">Meia verdade</span><p><b>“Com Lula 1 e 2 o desmatamento foi o maior.”</b> A média foi a maior, porque ele pegou o pico de 2004. Mas foi quando mais caiu: 72% entre 2003 e 2010.</p></div>
+    <div class="vfi"><span class="badge v">Verdade</span><p><b>“Bolsonaro parou o Fundo Amazônia.”</b> Em 2019 o governo extinguiu o comitê que aprovava os projetos, e as doações pararam. O STF mandou reativar em 2022.</p></div>
+    <div class="vfi"><span class="badge o">Não demonstrado</span><p><b>“O Dia do Fogo foi combinado por fazendeiros.”</b> Houve indícios, mas as investigações foram arquivadas sem ninguém indiciado.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-resumo">
+  <div class="verdict">
+    <h2 id="h-resumo">Resumindo</h2>
+    <ul>
+      <li>No <b>fogo</b>, a média mais alta é a de <b>Lula 1 e 2</b>, quando a derrubada estava no auge. Depois, <b>Bolsonaro</b> teve a média mais alta e <b>Dilma</b>, a mais baixa. <b>2024</b> foi o pior ano desde 2010 e <b>2025</b>, o melhor da Amazônia em toda a série.</li>
+      <li>No <b>desmatamento</b>, a maior queda foi com <b>Lula 1 e 2</b> e a maior alta, com <b>Bolsonaro</b>. Com Lula 3 a derrubada voltou a cair.</li>
+      <li>O <b>fogo</b> depende muito do clima: anos de seca forte, como 2024, sobem em qualquer governo. Mas fiscalização fraca e desmatamento alto ajudam o fogo a se espalhar.</li>
+    </ul>
+  </div>
+</section>
+
+<details class="mais">
+  <summary>Quer ver os números de cada ano? Toque aqui</summary>
+  <div class="mais-body">
+    <div class="tbl"><table>
+      <tr><th>Ano</th><th>Focos no Brasil</th><th>Focos na Amazônia</th><th>Desmatamento, km²</th></tr>
+      <tr><td>2003</td><td>341.237</td><td>174.400</td><td>25.396</td></tr>
+      <tr><td>2004</td><td>380.445</td><td>218.637</td><td>27.772</td></tr>
+      <tr><td>2005</td><td>362.563</td><td>213.720</td><td>19.014</td></tr>
+      <tr><td>2006</td><td>249.179</td><td>144.422</td><td>14.286</td></tr>
+      <tr><td>2007</td><td>393.915</td><td>186.480</td><td>11.651</td></tr>
+      <tr><td>2008</td><td>211.933</td><td>103.453</td><td>12.911</td></tr>
+      <tr><td>2009</td><td>155.102</td><td>81.682</td><td>7.464</td></tr>
+      <tr><td>2010</td><td>319.383</td><td>134.614</td><td>7.000</td></tr>
+      <tr><td>2011</td><td>158.099</td><td>58.186</td><td>6.418</td></tr>
+      <tr><td>2012</td><td>217.234</td><td>86.719</td><td>4.571</td></tr>
+      <tr><td>2013</td><td>128.145</td><td>58.688</td><td>5.891</td></tr>
+      <tr><td>2014</td><td>175.892</td><td>82.553</td><td>5.012</td></tr>
+      <tr><td>2015</td><td>216.778</td><td>106.438</td><td>6.207</td></tr>
+      <tr><td>2016</td><td>184.217</td><td>87.761</td><td>7.893</td></tr>
+      <tr><td>2017</td><td>207.508</td><td>107.439</td><td>6.947</td></tr>
+      <tr><td>2018</td><td>132.870</td><td>68.345</td><td>7.536</td></tr>
+      <tr><td>2019</td><td>197.632</td><td>89.176</td><td>10.129</td></tr>
+      <tr><td>2020</td><td>222.797</td><td>103.161</td><td>10.851</td></tr>
+      <tr><td>2021</td><td>184.081</td><td>75.090</td><td>13.038</td></tr>
+      <tr><td>2022</td><td>200.763</td><td>115.033</td><td>11.594</td></tr>
+      <tr><td>2023</td><td>189.901</td><td>98.639</td><td>9.064</td></tr>
+      <tr><td>2024</td><td>278.299</td><td>140.346</td><td>6.518</td></tr>
+      <tr><td>2025</td><td>136.393</td><td>43.131</td><td>5.731</td></tr>
+      <tr><td>2026</td><td>70.350</td><td>29.580</td><td>—</td></tr>
+    </table></div>
+    <p>2026: focos até setembro. Desmatamento: ano de agosto a julho; 2026 ainda não medido.</p>
+  </div>
+</details>
+
+<footer>
+  <p>Cada decisão e cada número traz o link de onde saiu.</p>
+  <p>Atualizado em 15 de outubro de 2026.</p>
+</footer>
+
+<section id="fontes-revisao" aria-labelledby="h-fontes-revisao" style="margin-block:32px;padding:20px;border:1px solid var(--line);border-radius:6px">
+<h2 id="h-fontes-revisao">Fontes e limites da leitura</h2>
+<p>Os focos são os do satélite de referência do INPE, por mês, de 1998 a setembro de 2026, para o Brasil e para o bioma Amazônia. Um foco é um ponto de calor detectado, não a área queimada; um incêndio grande pode gerar muitos focos, e nuvens e fumaça podem esconder alguns. O desmatamento é a taxa do PRODES para a Amazônia Legal, que vai de agosto a julho; a taxa de cada ano foi atribuída ao governo que estava no poder na maior parte desse período. As médias de fogo por governo somam os meses de cada mandato; Temer começa em maio de 2016. Clima e seca pesam muito no fogo, então uma diferença entre governos não prova, sozinha, que foi decisão deles. O Cerrado, o Pantanal e outros biomas também queimam e não têm uma seção própria aqui.</p>
+<p style="font-size:14px"><a href="https://fcarvalhodev.github.io/rotas/metodologia.html">Como distinguimos fatos, alegações e interpretações</a> · Revisão editorial: 15 de outubro de 2026.</p>
+</section>
+</main>
+
+<script>
+(function(){
+const fmt=v=>v.toLocaleString('pt-BR');
+const bars=(id,rows,max)=>{const el=document.getElementById(id);if(!el)return;el.innerHTML=rows.map(r=>{const w=r[2]/max*100;return `<div class="tr"><div class="lab">${r[0]}<span>${r[1]}</span></div><div class="t"><span class="f" style="--c:${r[3]};width:${w}%">${r[4]}</span></div></div>`}).join('')};
+const L="var(--g-lula)",D="var(--g-dilma)",T="var(--g-temer)",B="var(--g-bolso)";
+bars('fgov',[["Lula 1 e 2","2003 a 2010",301720,L,"301.720"],["Dilma","2011 a abr 2016",171034,D,"171.034"],["Temer","mai 2016 a 2018",190712,T,"190.712"],["Bolsonaro","2019 a 2022",201318,B,"201.318"],["Lula 3","2023 a set 2026",179985,L,"179.985"]],310000);
+bars('fam',[["Lula 1 e 2","2003 a 2010",157176,L,"157.176"],["Dilma","2011 a abr 2016",75356,D,"75.356"],["Temer","mai 2016 a 2018",95336,T,"95.336"],["Bolsonaro","2019 a 2022",95615,B,"95.615"],["Lula 3","2023 a set 2026",83119,L,"83.119"]],160000);
+bars('desm',[["Lula 1 e 2","2003 a 2010",15687,L,"15.687 km²"],["Dilma","2011 a 2016",5999,D,"5.999 km²"],["Temer","2017 e 2018",7242,T,"7.242 km²"],["Bolsonaro","2019 a 2022",11403,B,"11.403 km²"],["Lula 3","2023 a 2025",7104,L,"7.104 km²"]],16000);
+const F={"br": [341237, 380445, 362563, 249179, 393915, 211933, 155102, 319383, 158099, 217234, 128145, 175892, 216778, 184217, 207508, 132870, 197632, 222797, 184081, 200763, 189901, 278299, 136393, 70350], "p": [25396, 27772, 19014, 14286, 11651, 12911, 7464, 7000, 6418, 4571, 5891, 5012, 6207, 7893, 6947, 7536, 10129, 10851, 13038, 11594, 9064, 6518, 5731]};
+const gc=y=>y<=2010?L:y<=2015?D:y<=2018?T:y<=2022?B:L;
+function col(id,vals,y0,opt){const el=document.getElementById(id);if(!el)return;
+ const W=Math.max(300,Math.round(el.clientWidth-16)),sm=W<600,H=sm?260:300,pl=sm?54:58,pr=6,pt=12,pb=26,n=vals.length,bw=(W-pl-pr)/n;
+ const Y=v=>H-pb-v/opt.max*(H-pt-pb);let s=`<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">`;
+ for(let v=0;v<=opt.max;v+=opt.step){s+=`<line class="gl" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${pl-5}" y="${Y(v)+4}" text-anchor="end">${opt.lab(v)}</text>`}
+ vals.forEach((v,i)=>{const y=y0+i,x=pl+i*bw+bw*.12,w=bw*.76;s+=`<rect x="${x}" y="${Y(v)}" width="${w}" height="${H-pb-Y(v)}" fill="${(opt.gc||gc)(y)}" ${opt.part&&y===opt.part?'opacity=".45"':''}><title>${y}: ${fmt(v)}</title></rect>`;if(y%(sm?4:2)===(sm?3:1))s+=`<text x="${x+w/2}" y="${H-pb+16}" text-anchor="middle">${y}</text>`});
+ (opt.notes||[]).forEach(t=>{const i=t[0]-y0;s+=`<text class="lbl" x="${pl+i*bw+bw/2}" y="${Y(vals[i])-6}" text-anchor="${t[2]||'middle'}">${t[1]}</text>`});
+ el.innerHTML=s+'</svg>'}
+const draws=[()=>col('cfoc',F.br,2003,{max:400000,step:100000,lab:v=>fmt(v),part:2026,notes:[[2007,'2007: 394 mil'],[2024,'2024: 278 mil','end']]}),()=>col('cdes',F.p,2003,{max:30000,step:10000,lab:v=>fmt(v),gc:y=>y<=2010?L:y<=2016?D:y<=2018?T:y<=2022?B:L,notes:[[2004,'2004: 27,8 mil'],[2012,'2012: 4,6 mil'],[2021,'2021: 13 mil']]})];
+draws.forEach(f=>f());let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>draws.forEach(f=>f()),150)});
+})();
+</script>
+
+</body></html>

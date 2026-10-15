@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rota das Queimadas em ícones</title>
+<meta name="description" content="Queimadas e desmatamento de Lula 1 até hoje, em ícones: focos de fogo e derrubada da Amazônia governo por governo, com os dados do INPE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fcarvalhodev.github.io/rotas/visual/visual.css">
+<style>
+:root{--accent:#c2410c;--hero:#9a3412}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#fb923c;--hero:#9a3412}}
+:root[data-theme="dark"]{--accent:#fb923c;--hero:#9a3412}
+.hero{background:var(--hero);border-color:var(--hero)}.hero .go a{color:var(--hero)}
+</style>
+</head><body>
+<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rv-btn{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-family:var(--ui,system-ui);font-weight:800;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--paper,#fff);background:var(--accent);padding:10px 16px;border-radius:999px;box-shadow:0 2px 0 rgba(0,0,0,.15)}.rv-btn:hover{filter:brightness(1.08)}.rv-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><style>/* padrão das Rotas: formato fácil */body{font-size:19px;line-height:1.7}h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(46px,11vw,104px);line-height:.9;text-transform:uppercase;overflow-wrap:anywhere}h2{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:clamp(34px,7vw,52px);line-height:.95;text-transform:uppercase}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a href="https://fcarvalhodev.github.io/rota-das-queimadas/" aria-current="page">Queimadas</a><a href="https://fcarvalhodev.github.io/rota-dos-games/">Games</a><a class="rb-lang" href="en/visual.html" hreflang="en" lang="en">EN</a></div></nav>
+
+
+<main class="rv" id="rv" aria-label="Rota das Queimadas em ícones"></main>
+<script>
+window.RV_DATA={
+ kicker:"Rota das Queimadas · em ícones",
+ title:"Quem fez a floresta queimar mais?",
+ answer:"No <b>desmatamento</b>, a maior queda foi com <b>Lula 1 e 2</b> e a maior alta, com <b>Bolsonaro</b>; com <b>Lula 3</b> caiu de novo. No <b>fogo</b>, os anos 2000 foram os piores, e 2024 teve a seca mais forte da história.",
+ heroIcons:["iso-alvo","iso-trator","iso-sobe","iso-globo","iso-desce","iso-alvo","iso-lupa","iso-governo","iso-gota","iso-alvo"],
+ full:"index.html",
+ updated:"Dados do INPE até setembro de 2026 · atualizado em 15 de outubro de 2026 · ícones próprios e Tabler Icons (MIT)",
+ cards:[
+  {type:"hero",span:"s4",rows:2},
+  {type:"bars",span:"s8",label:"Desmatamento da Amazônia, média por ano",title:"A maior alta foi com Bolsonaro",max:16000,
+   items:[{name:"Lula 1 e 2",label:"15.687 km²",v:15687,color:"#c62828"},{name:"Dilma",label:"5.999 km²",v:5999,color:"#c2185b"},{name:"Temer",label:"7.242 km²",v:7242,color:"#4e5d6c"},{name:"Bolsonaro",label:"11.403 km²",v:11403,color:"#1d5fa8"},{name:"Lula 3",label:"7.104 km²",v:7104,color:"#c62828"}],
+   text:"Lula 1 e 2 começou no pico de 2004 e derrubou a taxa em 72%. Bolsonaro subiu 54%. Lula 3 caiu 51% até 2025.",
+   src:[["INPE: PRODES","https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"]]},
+  {type:"bars",span:"s8",label:"Focos de queimada no Brasil, média por ano",title:"O fogo foi maior nos anos 2000",max:310000,
+   items:[{name:"Lula 1 e 2",label:"301.720",v:301720,color:"#c62828"},{name:"Dilma",label:"171.034",v:171034,color:"#c2185b"},{name:"Temer",label:"190.712",v:190712,color:"#4e5d6c"},{name:"Bolsonaro",label:"201.318",v:201318,color:"#1d5fa8"},{name:"Lula 3",label:"179.985",v:179985,color:"#c62828"}],
+   text:"Lula 3 até setembro de 2026. Seca e calor pesam muito no número de focos.",
+   src:[["INPE: focos no Brasil","https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]]},
+  {type:"compare",span:"s4",label:"Focos na Amazônia",title:"Do pior ao melhor ano",
+   a:{name:"2024, seca recorde",v:140346,color:"#c62828"},b:{name:"2025, menor da série",v:43131,color:"var(--accent)"},
+   text:"2024 foi o maior desde 2007. 2025, o menor desde 1998.",
+   src:[["INPE: focos na Amazônia","https://data.inpe.br/queimadas/estatisticas/?tipo=biomas&item=amazonia"]]},
+  {type:"chips",span:"s8",label:"O que cada governo fez",title:"Plano, fundo, multas e seca",
+   items:[
+    ["2004","Lula: plano contra o desmatamento (PPCDAm)","Derrubada cai 84% até 2012","#c62828"],
+    ["2008","Lula: Fundo Amazônia","Cerca de R$ 3,4 bilhões, a maior parte da Noruega","#c62828"],
+    ["2012","Dilma: novo Código Florestal","Criticado por perdoar parte do desmatamento antigo","#c2185b"],
+    ["2019","Bolsonaro: Fundo Amazônia parado e menos multas","Autuações do Ibama 43,5% menores","#1d5fa8"],
+    ["2023","Lula: fundo e plano de volta","Meta de zerar o desmatamento ilegal até 2030","#c62828"],
+    ["2024","Lula: seca recorde e o pior fogo desde 2010","Em 2025, a Amazônia teve o menor fogo da série","#c62828"]],
+   src:[["Linha do tempo completa","index.html#h-gov"]]},
+  {type:"verdicts",span:"s12",label:"É verdade?",
+   items:[["v","“O desmatamento da Amazônia subiu com Bolsonaro.”"],["v","“O desmatamento caiu com Lula 3.”"],["m","“Com Lula as queimadas bateram recorde.”"],["v","“O pior período de queimadas foi nos primeiros governos Lula.”"],["v","“Bolsonaro parou o Fundo Amazônia.”"],["u","“O Dia do Fogo foi combinado por fazendeiros.”"]],
+   src:[["Explicação de cada uma","index.html#h-vf"]]}
+ ]};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://fcarvalhodev.github.io/rotas/visual/icons.js"></script>
+<script src="https://fcarvalhodev.github.io/rotas/visual/visual.js"></script>
+</body></html>
