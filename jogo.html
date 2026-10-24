@@ -1,289 +1,200 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Plantão do Satélite</title>
-<meta name="description" content="Você é o satélite do INPE. Primeiro, diga em que ano a Amazônia perdeu mais floresta. Depois, apague os boatos sobre o fogo.">
+<title>Brigadista</title>
+<meta name="description" content="Jogo da Rota das Queimadas: apague o fogo na floresta em sete anos reais, de 2004 a 2025, com a quantidade de focos que o INPE contou em cada um.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fcarvalhodev.github.io/rotas/jogos/jogo.css">
+<style>
+:root{
+  --bg:#f3f1ea; --paper:#fbfaf6; --ink:#1c1b1f; --muted:#5b5a63; --line:#d9d5ca; --soft:#ebe7dc;
+  --doc:#1f6b45; --doc-soft:#dcefe3; --open:#5b4bb0; --open-soft:#e7e3f6; --alleg:#a3501a; --alleg-soft:#f8e6d7; --no:#a12a2a; --no-soft:#f6dede;
+  --display:"Archivo","Arial Narrow",Impact,sans-serif;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121216; --paper:#1a1a20; --ink:#ecebf0; --muted:#a3a2ad; --line:#2e2d36; --soft:#24232b;
+  --doc:#6fd39c; --doc-soft:#173326; --open:#ab9ff0; --open-soft:#29254a; --alleg:#f0a066; --alleg-soft:#3a2516; --no:#f19b9b; --no-soft:#3a1c1c;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121216; --paper:#1a1a20; --ink:#ecebf0; --muted:#a3a2ad; --line:#2e2d36; --soft:#24232b;
+  --doc:#6fd39c; --doc-soft:#173326; --open:#ab9ff0; --open-soft:#29254a; --alleg:#f0a066; --alleg-soft:#3a2516; --no:#f19b9b; --no-soft:#3a1c1c;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px}
+header.g{padding-block:26px 8px;display:grid;gap:10px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{margin:0;font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(52px,13vw,104px);line-height:.86;text-transform:uppercase;overflow-wrap:anywhere}
+h2{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:clamp(30px,6.5vw,44px);line-height:.95;text-transform:uppercase;margin:0 0 10px}
+h3{font-family:var(--ui);font-size:19px;line-height:1.25;margin:0 0 6px}
+.lede{margin:0;max-width:64ch;font-size:18px}
+.how{margin:0;font-family:var(--ui);font-size:15px;color:var(--muted)}
+.btn{font-family:var(--ui);font-weight:800;font-size:17px;border:0;border-radius:999px;padding:12px 20px;background:var(--accent);color:var(--paper);cursor:pointer;min-height:48px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tg{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;white-space:nowrap;vertical-align:2px}
+.tg.doc{background:var(--doc-soft);color:var(--doc);border:1px solid var(--doc)}
+.tg.open{background:var(--open-soft);color:var(--open);border:1px dashed var(--open)}
+.tg.alleg{background:var(--alleg-soft);color:var(--alleg);border:1px solid var(--alleg)}
+.tg.no{background:var(--no-soft);color:var(--no);border:1px solid var(--no)}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.facts li{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c,var(--line));border-radius:8px;padding:12px 14px}
+.facts li b{font-family:var(--ui)}
+.facts li small{display:block;margin-top:4px;font-family:var(--ui);font-size:13px;color:var(--muted)}
+.facts li small a{color:var(--muted)}
+.facts .yr{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+section.blk{margin-block:26px}
+.note{font-family:var(--ui);font-size:14px;color:var(--muted)}
+.end{border:2px solid var(--accent);border-radius:12px;background:var(--paper);padding:18px;display:grid;gap:12px}
+footer.g{margin-block:36px 28px;font-family:var(--ui);font-size:14px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 <style>
 :root{--accent:#c2410c;--hero:#9a3412}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#fb923c;--hero:#9a3412}}
 :root[data-theme="dark"]{--accent:#fb923c;--hero:#9a3412}
-.hero{background:var(--hero);border-color:var(--hero)}.hero .go a{color:var(--hero)}
+
+</style>
+<style>
+.game{display:grid;gap:12px;margin-top:8px}
+.hud{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;font-family:var(--ui)}
+.hud b{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:36px;line-height:1;color:var(--accent)}
+.hud span{font-size:14px;color:var(--muted)}
+.timer{height:10px;border-radius:999px;background:var(--soft);overflow:hidden;border:1px solid var(--line)}
+.timer i{display:block;height:100%;width:100%;background:var(--accent)}
+.forest{position:relative;display:grid;grid-template-columns:repeat(8,1fr);gap:3px;padding:8px;border-radius:14px;background:#2f5d2a;border:3px solid #1f3d1c;touch-action:manipulation;user-select:none;-webkit-user-select:none;max-width:520px;width:100%;margin-inline:auto}
+.forest.dry{background:#7a6a2f;border-color:#5a4d1f}
+.cell{aspect-ratio:1;border:0;border-radius:8px;background:rgba(255,255,255,.08);font-size:clamp(20px,6vw,30px);line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
+.cell.fire{background:rgba(255,120,0,.35);animation:fl .5s ease infinite alternate}
+.cell.ash{background:rgba(0,0,0,.35);cursor:default}
+.cell.saved{animation:sv .5s ease}
+@keyframes fl{to{background:rgba(255,60,0,.55)}}
+@keyframes sv{from{background:rgba(80,170,255,.7)}}
+.cover{position:absolute;inset:0;overflow:auto;display:grid;place-items:center;align-content:center;gap:7px;background:rgba(10,20,10,.78);border-radius:11px;color:#fff;text-align:center;padding:16px;font-family:var(--ui)}
+.cover h3{color:#fff;font-size:18px;margin:0}
+.cover p{margin:0;max-width:38ch;font-size:14px;line-height:1.4}
+.cover .big{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:40px;line-height:1}.cover .btn{min-height:44px;padding:8px 18px}
+.cover .tg{margin:0 auto}
+.cover a{color:#cfe3ff}
+.blame{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.blame p{margin:0;font-family:var(--ui);font-size:14px;background:var(--soft);border-radius:12px;padding:8px 10px;min-height:54px}
+.blame b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.avg{display:grid;gap:8px;font-family:var(--ui);font-size:14px}
+.avg div{display:grid;grid-template-columns:96px 1fr 60px;gap:8px;align-items:center}
+.avg i{display:block;height:16px;border-radius:4px;background:var(--accent)}
+.avg b{font-family:var(--mono);font-size:13px;text-align:right}
+.end h2{margin:0}
 </style>
 </head><body>
 <style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rv-btn{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-family:var(--ui,system-ui);font-weight:800;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--paper,#fff);background:var(--accent);padding:10px 16px;border-radius:999px;box-shadow:0 2px 0 rgba(0,0,0,.15)}.rv-btn:hover{filter:brightness(1.08)}.rv-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a href="https://fcarvalhodev.github.io/rota-das-queimadas/" aria-current="page">Queimadas</a><a href="https://fcarvalhodev.github.io/rota-dos-games/">Games</a><a href="https://fcarvalhodev.github.io/rota-do-contracheque/">Contracheque</a><a href="https://fcarvalhodev.github.io/rota-palantir/">Palantir</a><a class="rb-lang" href="en/jogo.html" hreflang="en" lang="en">EN</a></div></nav>
-<main class="jg" id="jg" aria-live="polite"><noscript>Este jogo precisa de JavaScript. <a href="index.html">Ler a rota</a>.</noscript></main>
+<main class="wrap">
+<header class="g">
+  <span class="kicker">Rota das Queimadas · jogo</span>
+  <h1>Brigadista</h1>
+  <p class="lede">Todo ano tem fogo, e todo ano tem alguém culpando alguém. Você é o brigadista: o satélite mostra onde está queimando, e você corre para apagar.</p>
+  <p class="how">Como jogar: toque no 🔥 para apagar. Fogo que você não apaga se espalha e vira cinza. Cada ano dura 12 segundos e tem a quantidade de fogo que o INPE contou de verdade.</p>
+</header>
+
+<div class="game">
+  <div class="hud" aria-live="polite"><b id="yr">2004</b><span id="gov">governo Lula 1</span><b id="put">0</b><span>focos apagados</span></div>
+  <div class="timer" aria-hidden="true"><i id="tm"></i></div>
+  <div class="forest" id="forest" role="group" aria-label="Floresta: toque no fogo para apagar">
+    <div class="cover" id="cover"><h3>Você é o brigadista</h3><p>O satélite avisa onde tem fogo. Toque no 🔥 para apagar antes que ele se espalhe. São 7 anos de verdade, de 2004 a 2025, e cada ano tem a quantidade de fogo que o INPE contou.</p><button class="btn" type="button" id="go">Começar ▶</button></div>
+  </div>
+  <div class="blame" aria-live="polite"><p id="bG"><b>Governo</b>…</p><p id="bO"><b>Oposição</b>…</p></div>
+</div>
+<section class="blk end" id="end" hidden aria-live="polite">
+  <h2 id="endT"></h2>
+  <p id="endB"></p>
+  <h3>Média de focos por ano, em cada governo (mil)</h3>
+  <div class="avg" id="avg" role="img"></div>
+  <ul class="facts" id="facts" style="margin-top:12px"></ul>
+  <div class="row"><button class="btn" type="button" id="again">Jogar de novo</button><a class="btn ghost" href="index.html">Ler a Rota das Queimadas</a></div>
+</section>
+<section class="blk">
+  <h2>Relatório do satélite</h2>
+  <ul class="facts" id="log"></ul>
+</section>
+
+<footer class="g">
+  <p>Dados do INPE até setembro de 2026. Investigação não é condenação. Cada fato do jogo tem fonte; os selos seguem a <a href="https://fcarvalhodev.github.io/rotas/metodologia.html">metodologia das Rotas</a>.</p>
+  <p class="row"><a class="btn ghost" href="index.html">Ler a rota completa</a><a class="btn ghost" href="quiz.html">Fazer o quiz da rota</a></p>
+</footer>
+</main>
 <script>
-window.JG_DATA={
- "kicker": "Rota das Queimadas · jogo",
- "title": "Plantão do Satélite",
- "host": [
-  "🛰️",
-  "Satélite de plantão"
- ],
- "emo": "🔥",
- "intro": "Você é o satélite do INPE. Primeiro, diga em que ano a Amazônia perdeu mais floresta. Depois, apague os boatos sobre o fogo.",
- "rounds": [
-  {
-   "type": "mm",
-   "title": "Desmatamento na Amazônia",
-   "how": "escolha o ano em que a Amazônia perdeu mais floresta.",
-   "q": "Em que ano a Amazônia perdeu mais floresta?",
-   "n": 6,
-   "suf": " km²",
-   "items": [
-    {
-     "l": "1996",
-     "sub": "FHC",
-     "v": 18161
-    },
-    {
-     "l": "1997",
-     "sub": "FHC",
-     "v": 13227
-    },
-    {
-     "l": "1998",
-     "sub": "FHC",
-     "v": 17383
-    },
-    {
-     "l": "1999",
-     "sub": "FHC",
-     "v": 17259
-    },
-    {
-     "l": "2000",
-     "sub": "FHC",
-     "v": 18226
-    },
-    {
-     "l": "2001",
-     "sub": "FHC",
-     "v": 18165
-    },
-    {
-     "l": "2002",
-     "sub": "FHC",
-     "v": 21650
-    },
-    {
-     "l": "2003",
-     "sub": "Lula",
-     "v": 25396
-    },
-    {
-     "l": "2004",
-     "sub": "Lula",
-     "v": 27772
-    },
-    {
-     "l": "2005",
-     "sub": "Lula",
-     "v": 19014
-    },
-    {
-     "l": "2006",
-     "sub": "Lula",
-     "v": 14286
-    },
-    {
-     "l": "2007",
-     "sub": "Lula",
-     "v": 11651
-    },
-    {
-     "l": "2008",
-     "sub": "Lula",
-     "v": 12911
-    },
-    {
-     "l": "2009",
-     "sub": "Lula",
-     "v": 7464
-    },
-    {
-     "l": "2010",
-     "sub": "Lula",
-     "v": 7000
-    },
-    {
-     "l": "2011",
-     "sub": "Dilma",
-     "v": 6418
-    },
-    {
-     "l": "2012",
-     "sub": "Dilma",
-     "v": 4571
-    },
-    {
-     "l": "2013",
-     "sub": "Dilma",
-     "v": 5891
-    },
-    {
-     "l": "2014",
-     "sub": "Dilma",
-     "v": 5012
-    },
-    {
-     "l": "2015",
-     "sub": "Dilma",
-     "v": 6207
-    },
-    {
-     "l": "2016",
-     "sub": "Dilma",
-     "v": 7893
-    },
-    {
-     "l": "2017",
-     "sub": "Temer",
-     "v": 6947
-    },
-    {
-     "l": "2018",
-     "sub": "Temer",
-     "v": 7536
-    },
-    {
-     "l": "2019",
-     "sub": "Bolsonaro",
-     "v": 10129
-    },
-    {
-     "l": "2020",
-     "sub": "Bolsonaro",
-     "v": 10851
-    },
-    {
-     "l": "2021",
-     "sub": "Bolsonaro",
-     "v": 13038
-    },
-    {
-     "l": "2022",
-     "sub": "Bolsonaro",
-     "v": 11594
-    },
-    {
-     "l": "2023",
-     "sub": "Lula",
-     "v": 9064
-    },
-    {
-     "l": "2024",
-     "sub": "Lula",
-     "v": 6518
-    },
-    {
-     "l": "2025",
-     "sub": "Lula",
-     "v": 5731
-    }
-   ],
-   "note": "Taxa PRODES, do INPE, na Amazônia Legal. Cada “ano” vai de agosto a julho e foi atribuído ao governo que estava no poder na maior parte do período.",
-   "src": [
-    [
-     "INPE: TerraBrasilis",
-     "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"
-    ]
-   ]
-  },
-  {
-   "type": "boato",
-   "title": "Boatos sobre o fogo",
-   "how": "leia a frase que circula e diga se é Verdade, Meia verdade, Falso ou Sem prova.",
-   "n": 5,
-   "items": [
-    {
-     "c": "Com Lula as queimadas bateram recorde.",
-     "v": "m",
-     "e": "Em 2024 o Brasil teve 278 mil focos, o maior número desde 2010, num ano de seca recorde. Mas em 2025 a Amazônia teve o menor número de focos da série, e a média de Lula 3 é menor que a de Bolsonaro.",
-     "s": []
-    },
-    {
-     "c": "O pior período de queimadas foi nos primeiros governos Lula.",
-     "v": "v",
-     "e": "A média de 2003 a 2010 foi de 302 mil focos por ano, a mais alta de todos. Os anos recordes foram 2007 e 2004. Mas, no mesmo período, o desmatamento caiu 72%.",
-     "s": []
-    },
-    {
-     "c": "Com Bolsonaro a Amazônia pegou fogo como nunca.",
-     "v": "m",
-     "e": "O desmatamento subiu 54% e o fogo foi o mais alto entre os governos depois de 2010. Mas os números de fogo ficaram bem abaixo dos anos 2000.",
-     "s": []
-    },
-    {
-     "c": "O desmatamento da Amazônia subiu com Bolsonaro.",
-     "v": "v",
-     "e": "Foi de 7.536 km² em 2018 para 11.594 em 2022, com pico de 13.038 em 2021: alta de 54%.",
-     "s": []
-    },
-    {
-     "c": "O desmatamento caiu com Lula 3.",
-     "v": "v",
-     "e": "De 11.594 km² em 2022 para 5.731 em 2025: queda de 51%.",
-     "s": []
-    },
-    {
-     "c": "Com Lula 1 e 2 o desmatamento foi o maior.",
-     "v": "m",
-     "e": "A média foi a maior, porque ele pegou o pico de 2004. Mas foi quando mais caiu: 72% entre 2003 e 2010.",
-     "s": []
-    },
-    {
-     "c": "Bolsonaro parou o Fundo Amazônia.",
-     "v": "v",
-     "e": "Em 2019 o governo extinguiu o comitê que aprovava os projetos, e as doações pararam. O STF mandou reativar em 2022.",
-     "s": []
-    },
-    {
-     "c": "O Dia do Fogo foi combinado por fazendeiros.",
-     "v": "u",
-     "e": "Houve indícios, mas as investigações foram arquivadas sem ninguém indiciado.",
-     "s": []
-    }
-   ]
-  }
- ],
- "ranks": [
-  [
-   0,
-   "Satélite com a lente suja."
-  ],
-  [
-   40,
-   "Viu a fumaça, não viu o fogo."
-  ],
-  [
-   65,
-   "Satélite calibrado."
-  ],
-  [
-   90,
-   "Visão de águia lá do espaço."
-  ]
- ],
- "quips": {
-  "ok": [
-   "Isso! Pode publicar.",
-   "Na mosca. A fonte agradece.",
-   "Acertou. O grupo da família vai ter que engolir.",
-   "Boa! Checador raiz."
-  ],
-  "no": [
-   "Errou. Mas pelo menos você não compartilhou.",
-   "Quase. Leia a explicação antes de mandar no zap.",
-   "Não foi dessa vez. Acontece até com jornalista.",
-   "Ops. A tia do zap venceu essa."
-  ]
- },
- "full": "index.html",
- "updated": "Rotas · Rota das Queimadas"
-};
+
+const LBL={doc:"Documentado",open:"Em aberto",alleg:"Alegação",no:"Não demonstrado"};
+const $=id=>document.getElementById(id);
+function factLi(f,withYear){
+ const li=document.createElement("li");li.style.setProperty("--c","var(--"+f.ev+")");
+ const tg=document.createElement("span");tg.className="tg "+f.ev;tg.textContent=LBL[f.ev];
+ const b=document.createElement("b");b.textContent=" "+f.t+(/[?!.…]$/.test(f.t)?" ":". ");
+ if(withYear&&f.y){const y=document.createElement("span");y.className="yr";y.textContent=f.y;li.append(y)}
+ li.append(tg,b,document.createTextNode(f.b+" "));
+ if(f.src){const sm=document.createElement("small");const a=document.createElement("a");a.href=f.src[1];a.target="_blank";a.rel="noopener";a.textContent="Fonte: "+f.src[0];sm.append(a);li.append(sm)}
+ return li;
+}
+const ROUNDS=[{"y": 2004, "g": "Lula 1", "f": 380445, "dry": 0, "t": "Auge da derrubada da Amazônia: 27,8 mil km² de floresta derrubada no ano. Depois de derrubar, muita gente queima a área.", "src": ["INPE/PRODES: desmatamento", "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"]}, {"y": 2007, "g": "Lula 2", "f": 393915, "dry": 0, "t": "O ano com mais focos de toda a série do INPE, que começa em 1998.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}, {"y": 2012, "g": "Dilma", "f": 217234, "dry": 0, "t": "A derrubada da Amazônia tinha caído muito desde 2004. Entre os cinco governos, a média de focos de Dilma foi a mais baixa.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}, {"y": 2017, "g": "Temer", "f": 207508, "dry": 0, "t": "Governo Temer: média de 191 mil focos por ano.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}, {"y": 2020, "g": "Bolsonaro", "f": 222797, "dry": 0, "t": "No governo Bolsonaro, o desmatamento da Amazônia subiu 54% entre 2018 e 2022.", "src": ["INPE/PRODES: desmatamento", "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"]}, {"y": 2024, "g": "Lula 3", "f": 278299, "dry": 1, "t": "A seca mais forte da história, com El Niño: o maior número de focos no Brasil desde 2010. O fogo se espalha muito mais rápido.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}, {"y": 2025, "g": "Lula 3", "f": 136393, "dry": 0, "t": "A Amazônia teve o menor número de focos já medido: 43 mil. O desmatamento caiu 51% desde 2022.", "src": ["INPE: focos na Amazônia", "https://data.inpe.br/queimadas/estatisticas/?tipo=biomas&item=amazonia"]}];
+const AVG=[["Lula 1 e 2", 302], ["Dilma", 171], ["Temer", 191], ["Bolsonaro", 201], ["Lula 3", 180]];
+const FACTS=[{"ev": "doc", "t": "Média de focos por governo", "b": "Lula 1 e 2: 302 mil por ano, quando a derrubada estava no auge. Dilma: 171 mil. Temer: 191 mil. Bolsonaro: 201 mil. Lula 3: 180 mil, até setembro de 2026.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}, {"ev": "doc", "t": "O desmatamento, governo por governo", "b": "A maior queda foi com Lula 1 e 2, de 27,8 mil km² em 2004 para 7 mil em 2010. A maior alta foi com Bolsonaro, de 54% entre 2018 e 2022. Com Lula 3, caiu 51% até 2025.", "src": ["INPE/PRODES: desmatamento", "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"]}, {"ev": "doc", "t": "Seca ou culpa de gente?", "b": "As duas coisas. O fogo na floresta quase sempre começa com alguém, para limpar pasto ou área derrubada. A seca decide quanto ele se espalha. Por isso um ano sozinho engana: é preciso olhar a média de vários anos.", "src": ["INPE: focos no Brasil", "https://data.inpe.br/queimadas/estatisticas/?tipo=paises&item=brasil"]}];
+const GOV=["“Foi a seca! Ninguém controla o clima.”", "“É herança do governo anterior!”", "“Estamos combatendo como nunca!”"];
+const OPP=["“Culpa do governo! Cadê a fiscalização?”", "“O país está pegando fogo!”", "“Nunca se queimou tanto!”"];
+
+const COLS=8,ROWS=8,DUR=12,forest=$("forest");
+let cells=[],state=[],born=[],ri,run=false,t0,last,acc,put,putTotal,lost,raf;
+const num=x=>x.toLocaleString("pt-BR");
+function build(){for(let i=0;i<COLS*ROWS;i++){const b=document.createElement("button");b.type="button";b.className="cell";b.textContent="🌳";b.setAttribute("aria-label","árvore viva");
+ b.addEventListener("pointerdown",e=>{e.preventDefault();tap(i)});b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tap(i)}});forest.insertBefore(b,$("cover"));cells.push(b)}}
+function setCell(i,s){state[i]=s;const c=cells[i];c.className="cell"+(s===1?" fire":s===2?" ash":"");c.textContent=s===1?"🔥":s===2?"⬛":"🌳";c.setAttribute("aria-label",s===1?"fogo aqui":s===2?"área queimada":"árvore viva")}
+function tap(i){if(!run||state[i]!==1)return;setCell(i,0);cells[i].classList.add("saved");put++;putTotal++;$("put").textContent=putTotal}
+function ignite(){const free=[];state.forEach((s,i)=>{if(s===0)free.push(i)});if(!free.length)return;const i=free[Math.floor(Math.random()*free.length)];setCell(i,1);born[i]=performance.now()}
+function neigh(i){const r=Math.floor(i/COLS),c=i%COLS,o=[];[[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc])=>{const R=r+dr,C=c+dc;if(R>=0&&R<ROWS&&C>=0&&C<COLS)o.push(R*COLS+C)});return o}
+function loop(now){if(!run)return;const R=ROUNDS[ri];const dt=(now-last)/1000;last=now;const el=(now-t0)/1000;
+ $("tm").style.width=Math.max(0,100-el/DUR*100)+"%";
+ acc+=dt*(R.f/400000*2.6);while(acc>=1){acc--;ignite()}
+ const spread=R.dry?1.6:2.6,burn=R.dry?4:5;
+ state.forEach((s,i)=>{if(s!==1)return;const age=(now-born[i])/1000;
+  if(age>spread&&!cells[i].dataset.sp){cells[i].dataset.sp=1;const n=neigh(i).filter(j=>state[j]===0);if(n.length){const j=n[Math.floor(Math.random()*n.length)];setCell(j,1);born[j]=now}}
+  if(age>burn){setCell(i,2);delete cells[i].dataset.sp;lost++}});
+ if(el>=DUR)return endRound();raf=requestAnimationFrame(loop)}
+function blame(){const b=(id,who,t)=>{$(id).textContent="";const x=document.createElement("b");x.textContent=who;$(id).append(x,document.createTextNode(t))};
+ b("bG","Governo {g}".replace("{g}",ROUNDS[ri].g),GOV[ri%GOV.length]);b("bO","Oposição",OPP[(ri+1)%OPP.length])}
+function startRound(){const R=ROUNDS[ri];$("cover").hidden=true;cells.forEach((c,i)=>{setCell(i,0);delete c.dataset.sp});
+ $("yr").textContent=R.y;$("gov").textContent="governo {g}".replace("{g}",R.g);forest.classList.toggle("dry",!!R.dry);blame();
+ put=0;lost=0;acc=0.8;run=true;t0=last=performance.now();raf=requestAnimationFrame(loop)}
+function endRound(){run=false;cancelAnimationFrame(raf);const R=ROUNDS[ri];
+ const burned=state.filter(s=>s===2).length+state.filter(s=>s===1).length;const saved=Math.round((1-burned/state.length)*100);
+ const f={ev:"doc",t:"Ano {y} · governo {g}: {n} focos no Brasil".replace("{y}",R.y).replace("{g}",R.g).replace("{n}",num(R.f)),b:R.t,src:R.src};$("log").prepend(factLi(f,false));
+ const cv=$("cover");cv.textContent="";
+ const h=document.createElement("h3");h.textContent="Ano {y}: você salvou {s}% das árvores".replace("{y}",R.y).replace("{s}",saved);
+ const big=document.createElement("div");big.className="big";big.textContent=num(R.f);
+ const p1=document.createElement("p");p1.textContent="focos no Brasil, segundo o INPE";
+ const tg=document.createElement("span");tg.className="tg doc";tg.textContent=LBL.doc;
+ const p2=document.createElement("p");p2.textContent=R.t;
+ const a=document.createElement("a");a.href=R.src[1];a.target="_blank";a.rel="noopener";a.textContent="Fonte: "+R.src[0];
+ const btn=document.createElement("button");btn.className="btn";btn.type="button";btn.textContent=ri<ROUNDS.length-1?"Próximo ano ▶":"Ver o resultado ▶";
+ btn.addEventListener("click",()=>{ri++;if(ri<ROUNDS.length)startRound();else finish()});
+ cv.append(h,big,p1,tg,p2,a,btn);cv.hidden=false;btn.focus({preventScroll:true})}
+function finish(){const cv=$("cover");cv.textContent="";const h=document.createElement("h3");h.textContent="Fim do plantão";cv.append(h);
+ $("endT").textContent="Você apagou {n} focos".replace("{n}",putTotal);
+ $("endB").textContent="Por mais rápido que você tenha sido, o número do INPE de cada ano não mudou. Brigadista ajuda, mas o tamanho do fogo depende da seca e da derrubada da floresta. E repare: todo ano o governo culpou o clima e a oposição culpou o governo, qualquer que fosse o governo. Um ano sozinho engana; a média conta melhor:";
+ const av=$("avg");av.textContent="";const mx=Math.max(...AVG.map(a=>a[1]));
+ AVG.forEach(([g,v])=>{const d=document.createElement("div");const n=document.createElement("span");n.textContent=g;const t=document.createElement("span");const i=document.createElement("i");i.style.width=(v/mx*100)+"%";t.append(i);const b=document.createElement("b");b.textContent=v;d.append(n,t,b);av.append(d)});
+ av.setAttribute("aria-label",AVG.map(a=>a[0]+" "+a[1]+" mil").join(", "));
+ $("facts").textContent="";FACTS.forEach(f=>$("facts").append(factLi(f,false)));
+ $("end").hidden=false;setTimeout(()=>$("end").scrollIntoView({behavior:"smooth",block:"start"}),300)}
+function start(){ri=0;putTotal=0;$("put").textContent=0;$("log").textContent="";$("end").hidden=true;startRound()}
+build();cells.forEach((c,i)=>setCell(i,0));
+$("go").addEventListener("click",()=>{forest.scrollIntoView({behavior:"smooth",block:"center"});start()});
+$("again").addEventListener("click",()=>{forest.scrollIntoView({behavior:"smooth",block:"center"});start()});
+
 </script>
-<script src="https://fcarvalhodev.github.io/rotas/jogos/jogo.js"></script>
 </body></html>
